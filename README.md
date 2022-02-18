@@ -16,11 +16,11 @@ oclif example Hello World CLI
 # Usage
 <!-- usage -->
 ```sh-session
-$ npm install -g pd
+$ npm install -g packdir-cli
 $ pd COMMAND
 running command...
 $ pd (--version)
-pd/0.0.0 darwin-x64 node-v14.17.4
+packdir-cli/0.0.0 linux-x64 node-v14.15.1
 $ pd --help [COMMAND]
 USAGE
   $ pd COMMAND
@@ -32,6 +32,7 @@ USAGE
 * [`pd hello PERSON`](#pd-hello-person)
 * [`pd hello world`](#pd-hello-world)
 * [`pd help [COMMAND]`](#pd-help-command)
+* [`pd list [FILE]`](#pd-list-file)
 * [`pd plugins`](#pd-plugins)
 * [`pd plugins:inspect PLUGIN...`](#pd-pluginsinspect-plugin)
 * [`pd plugins:install PLUGIN...`](#pd-pluginsinstall-plugin)
@@ -98,6 +99,27 @@ DESCRIPTION
 ```
 
 _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v5.1.11/src/commands/help.ts)_
+
+## `pd list [FILE]`
+
+List all ebooks.
+
+```
+USAGE
+  $ pd list [FILE] [-n <value>] [-f]
+
+FLAGS
+  -f, --force
+  -n, --name=<value>  name to print
+
+DESCRIPTION
+  List all ebooks.
+
+EXAMPLES
+  $ pd list
+```
+
+_See code: [dist/commands/list.ts](https://github.com/packdir/pd/blob/v0.0.0/dist/commands/list.ts)_
 
 ## `pd plugins`
 

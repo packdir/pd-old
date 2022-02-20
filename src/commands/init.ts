@@ -3,7 +3,8 @@
  */
 
 import { Command, Flags } from '@oclif/core'
-import { stat, mkdir } from 'fs/promises'
+//import { writeFile } from 'fs'
+import { stat, mkdir, writeFile } from 'fs/promises'
 import inquirer from 'inquirer'
 
 export default class Init extends Command {
@@ -46,12 +47,16 @@ export default class Init extends Command {
 
     inquirer
       .prompt(questions)
-      .then((answers) => {
+      .then( async (answers) => {
         console.log('your answers: ', answers)
+        await writeFile('packdir.json', JSON.stringify({"Document name": "packdir"}, null, 2))
+        console.log('Create packdir.json successfully!')
       })
       .catch((err) => {
         console.log('Error: ', err)
       })
+
+
 
     // Create .packdir directory
     stat('.packdir').catch(async (err) => {

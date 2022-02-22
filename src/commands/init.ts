@@ -1,14 +1,23 @@
 /**
- * Init
+ * Init to create packdir.json
  */
 
 import { Command, Flags } from '@oclif/core'
-//import { writeFile } from 'fs'
-import { stat, mkdir, writeFile } from 'fs/promises'
+import { stat, mkdir, writeFile, readdir } from 'fs/promises'
+import { basename } from 'path'
 import inquirer from 'inquirer'
 
+/**
+ * Interface for the status of files in init qestions.
+ */
+interface fileInQuestion {
+  name: string,
+  checked: boolean,
+  value: string
+}
+
 export default class Init extends Command {
-  static description = 'describe the command here'
+  static description = 'Init to create packdir.json'
 
   static examples = [
     '<%= config.bin %> <%= command.id %>',
@@ -36,14 +45,7 @@ export default class Init extends Command {
       this.log(`you input --yes:`)
     }
 
-    const questions = [
-      {
-        type: 'input',
-        name: 'doc_name',
-        message: 'Document(epub) name: (packdir)',
-        default: 'packdir'
-      }
-    ]
+    const questions = await this.initQuestions()
 
     inquirer
       .prompt(questions)
@@ -64,5 +66,47 @@ export default class Init extends Command {
         await mkdir('.packdir/epubs', { recursive: true })
       }
     })
+  }
+
+  /**
+   * Get questions for init.
+   *
+   * @returns Questions for init.
+   */
+  private async initQuestions() {
+    const currentPathname = basename(process.cwd())
+
+    const files = await readdir('./')
+    let markdownFiles: fileInQuestion[] = []
+    files.forEach((filename) => {
+      if ('.md' === filename.substring(filename.length - 3).toLowerCase()) {
+        markdownFiles.push({
+          name: filename,
+          checked: true,
+          value: filename
+        })
+      }
+    })
+
+    let questions = [
+      {
+        type: 'input',
+        name: 'doc_name',
+        message: 'Document name:',
+        default: currentPathname
+      },
+      {
+        type: 'checkbox',
+        name: 'doc_articles',
+        message: 'What files do you want to include?',
+        pageSize: 25,
+        choices: markdownFiles
+      }
+    ]
+    return questions
+  }
+
+  private getArticleList() {
+    let a = 'abc'
   }
 }

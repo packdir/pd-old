@@ -1,7 +1,7 @@
-oclif-hello-world
+Packdir cli (pd)
 =================
 
-oclif example Hello World CLI
+Command line tool to generate epub books for markdown files.
 
 [![oclif](https://img.shields.io/badge/cli-oclif-brightgreen.svg)](https://oclif.io)
 [![Version](https://img.shields.io/npm/v/oclif-hello-world.svg)](https://npmjs.org/package/oclif-hello-world)
@@ -20,7 +20,7 @@ $ npm install -g packdir-cli
 $ pd COMMAND
 running command...
 $ pd (--version)
-packdir-cli/0.0.0 linux-x64 node-v14.15.1
+packdir-cli/0.0.2 linux-x64 node-v14.15.1
 $ pd --help [COMMAND]
 USAGE
   $ pd COMMAND
@@ -29,9 +29,11 @@ USAGE
 <!-- usagestop -->
 # Commands
 <!-- commands -->
+* [`pd create [FILE]`](#pd-create-file)
 * [`pd hello PERSON`](#pd-hello-person)
 * [`pd hello world`](#pd-hello-world)
 * [`pd help [COMMAND]`](#pd-help-command)
+* [`pd init [FILE]`](#pd-init-file)
 * [`pd list [FILE]`](#pd-list-file)
 * [`pd plugins`](#pd-plugins)
 * [`pd plugins:inspect PLUGIN...`](#pd-pluginsinspect-plugin)
@@ -39,6 +41,27 @@ USAGE
 * [`pd plugins:link PLUGIN`](#pd-pluginslink-plugin)
 * [`pd plugins:uninstall PLUGIN...`](#pd-pluginsuninstall-plugin)
 * [`pd plugins update`](#pd-plugins-update)
+
+## `pd create [FILE]`
+
+Create a document.
+
+```
+USAGE
+  $ pd create [FILE] [-n <value>] [-f]
+
+FLAGS
+  -f, --force
+  -n, --name=<value>  name to print
+
+DESCRIPTION
+  Create a document.
+
+EXAMPLES
+  $ pd create
+```
+
+_See code: [dist/commands/create.ts](https://github.com/packdir/pd/blob/v0.0.2/dist/commands/create.ts)_
 
 ## `pd hello PERSON`
 
@@ -62,7 +85,7 @@ EXAMPLES
   hello friend from oclif! (./src/commands/hello/index.ts)
 ```
 
-_See code: [dist/commands/hello/index.ts](https://github.com/packdir/pd/blob/v0.0.0/dist/commands/hello/index.ts)_
+_See code: [dist/commands/hello/index.ts](https://github.com/packdir/pd/blob/v0.0.2/dist/commands/hello/index.ts)_
 
 ## `pd hello world`
 
@@ -100,6 +123,26 @@ DESCRIPTION
 
 _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v5.1.11/src/commands/help.ts)_
 
+## `pd init [FILE]`
+
+Init to create packdir.json
+
+```
+USAGE
+  $ pd init [FILE] [-y]
+
+FLAGS
+  -y, --yes
+
+DESCRIPTION
+  Init to create packdir.json
+
+EXAMPLES
+  $ pd init
+```
+
+_See code: [dist/commands/init.ts](https://github.com/packdir/pd/blob/v0.0.2/dist/commands/init.ts)_
+
 ## `pd list [FILE]`
 
 List all ebooks.
@@ -119,7 +162,7 @@ EXAMPLES
   $ pd list
 ```
 
-_See code: [dist/commands/list.ts](https://github.com/packdir/pd/blob/v0.0.0/dist/commands/list.ts)_
+_See code: [dist/commands/list.ts](https://github.com/packdir/pd/blob/v0.0.2/dist/commands/list.ts)_
 
 ## `pd plugins`
 

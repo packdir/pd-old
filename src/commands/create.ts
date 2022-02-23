@@ -11,7 +11,7 @@ import { contentAlice, optionsAlice } from '../aliceData'
 import epub, { Chapter } from '../lib'
 
 export default class Create extends Command {
-  static description = 'Create a document.'
+  static description = 'Create an EPUB book.'
 
   static examples = [
     '<%= config.bin %> <%= command.id %>',
@@ -36,18 +36,18 @@ export default class Create extends Command {
     }
 
     // Test epub.
-    const metadata = {
-      title: "custome title OKOK2w"
-    }
-    //const epub = new Packdocument('metadata')
-    const epub2 = new Packdocument(metadata)
-    epub2.saveAsEpub()
+    //const metadata = {
+    //  title: "custome title OKOK2w"
+    //}
+    //const epub2 = new Packdocument(metadata)
+    //epub2.saveAsEpub()
 
     // Generate from markdown files in current path.
-    const mdcontent = await Packdocument.generateFromPath()
+    const [docTitle, mdcontent] = await Packdocument.generateFromPath()
+    console.log('cntent::', mdcontent)
     const contentmd: Chapter[] = [
       {
-        title: "README",
+        title: docTitle,
         content: mdcontent
       }
     ]
@@ -55,7 +55,7 @@ export default class Create extends Command {
     // Alice
     //const content = await epub(optionsAlice, contentAlice)
     const content = await epub(optionsAlice, contentmd)
-    await writeFile(`alice22.epub`, Buffer.from(content))
+    await writeFile(`${docTitle}.epub`, Buffer.from(content))
     console.log('Alice: finised')
   }
 }

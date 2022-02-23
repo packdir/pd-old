@@ -24,7 +24,6 @@ export default class Init extends Command {
   ]
 
   static flags = {
-    // flag with no value (-y, --yes)
     yes: Flags.boolean({char: 'y'}),
   }
 
@@ -50,22 +49,20 @@ export default class Init extends Command {
     inquirer
       .prompt(questions)
       .then( async (answers) => {
-        console.log('your answers: ', answers)
-        await writeFile('packdir.json', JSON.stringify({"Document name": "packdir"}, null, 2))
+        const config = this.generateConfig(answers)
+        await writeFile('packdir.json', config)
         console.log('Create packdir.json successfully!')
       })
       .catch((err) => {
         console.log('Error: ', err)
       })
 
-
-
     // Create .packdir directory
-    stat('.packdir').catch(async (err) => {
-      if (err.code === 'ENOENT') { // Directory .packdir is not existing
-        await mkdir('.packdir/epubs', { recursive: true })
-      }
-    })
+    //stat('.packdir').catch(async (err) => {
+    //  if (err.code === 'ENOENT') { // Directory .packdir is not existing
+    //    await mkdir('.packdir/epubs', { recursive: true })
+    //  }
+    //})
   }
 
   /**
@@ -96,6 +93,12 @@ export default class Init extends Command {
         default: currentPathname
       },
       {
+        type: 'input',
+        name: 'author',
+        message: 'Author:',
+        default: ''
+      },
+      {
         type: 'checkbox',
         name: 'doc_articles',
         message: 'What files do you want to include?',
@@ -106,7 +109,18 @@ export default class Init extends Command {
     return questions
   }
 
-  private getArticleList() {
-    let a = 'abc'
+  private generateConfig(answers: any) {
+    let articles: string[] = []
+    answers.doc_articles.forEach((filename: string) => {
+      articles.push(filename)
+    })
+
+    const config = {
+      "documentName": answers.doc_name,
+      "author": answers.author,
+      "content": articles
+    }
+
+    return JSON.stringify(config, null, 2)
   }
 }

@@ -62,11 +62,13 @@ export class Packdocument {
       const rawconfig = await readFile(`./packdir.json`, { encoding: 'utf-8' })
       const config = JSON.parse(rawconfig)
       docTitle = config.documentName
+      let count = 1
       for (const file of config.content) {
         const content = await readFile(`./${file}`, { encoding: 'utf-8' })
+        const [articleTitle, mdstring] = this.getMarkdownArticleTitle(content, file, count++)
         htmls.push({
-          title: docTitle,
-          content: marked(content)
+          title: articleTitle,
+          content: marked(mdstring)
         })
       }
 
@@ -91,6 +93,39 @@ export class Packdocument {
     }
 
     return [docTitle, htmls]
+  }
+
+  /**
+   * Get the title of markdown document.
+   * @param markdown File content
+   * @param filename Filename as default title if no title in markdown document.
+   * @returns Chapter title and content.
+   */
+  static getMarkdownArticleTitle(markdown: string, filename: string, count: number): [string, string] {
+    let title = `${count}. ${filename}`
+    const lines = markdown.split('\n')
+    let removedTitle = false
+    for (let i=0; i<10 && i<lines.length; i++) {
+      if ('# ' === lines[i].substring(0, 2) && lines[i].length > 2) {
+        title = `${count}. ${lines[i].substring(2)}`
+        lines.splice(i, 1)
+        removedTitle = true
+        break
+      }
+
+      if ('===' === lines[i].substring(0, 3) && i>0 && lines[i-1].length > 1) {
+        title = `${count}. ${lines[i-1]}`
+        lines.splice(i-1, 2)
+        removedTitle = true
+        break
+      }
+    }
+
+    if (removedTitle) {
+      markdown = lines.join('\n')
+    }
+
+    return [title, markdown]
   }
 
   private constructWithMarkdownFile(pathname?: string) {

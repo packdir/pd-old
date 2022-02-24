@@ -17,7 +17,7 @@ $ npm install -g packdir-cli
 $ pd COMMAND
 running command...
 $ pd (--version)
-packdir-cli/0.0.3 linux-x64 node-v14.15.1
+packdir-cli/0.1.0 linux-x64 node-v14.15.1
 $ pd --help [COMMAND]
 USAGE
   $ pd COMMAND
@@ -58,7 +58,7 @@ EXAMPLES
   $ pd create
 ```
 
-_See code: [dist/commands/create.ts](https://github.com/packdir/pd/blob/v0.0.3/dist/commands/create.ts)_
+_See code: [dist/commands/create.ts](https://github.com/packdir/pd/blob/v0.1.0/dist/commands/create.ts)_
 
 ## `pd hello PERSON`
 
@@ -82,7 +82,7 @@ EXAMPLES
   hello friend from oclif! (./src/commands/hello/index.ts)
 ```
 
-_See code: [dist/commands/hello/index.ts](https://github.com/packdir/pd/blob/v0.0.3/dist/commands/hello/index.ts)_
+_See code: [dist/commands/hello/index.ts](https://github.com/packdir/pd/blob/v0.1.0/dist/commands/hello/index.ts)_
 
 ## `pd hello world`
 
@@ -138,7 +138,7 @@ EXAMPLES
   $ pd init
 ```
 
-_See code: [dist/commands/init.ts](https://github.com/packdir/pd/blob/v0.0.3/dist/commands/init.ts)_
+_See code: [dist/commands/init.ts](https://github.com/packdir/pd/blob/v0.1.0/dist/commands/init.ts)_
 
 ## `pd list [FILE]`
 
@@ -159,7 +159,7 @@ EXAMPLES
   $ pd list
 ```
 
-_See code: [dist/commands/list.ts](https://github.com/packdir/pd/blob/v0.0.3/dist/commands/list.ts)_
+_See code: [dist/commands/list.ts](https://github.com/packdir/pd/blob/v0.1.0/dist/commands/list.ts)_
 
 ## `pd plugins`
 

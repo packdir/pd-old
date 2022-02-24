@@ -4,10 +4,7 @@ Packdir cli (pd)
 Command line tool to generate epub books for markdown files.
 
 [![packdir.com](https://img.shields.io/badge/cli-oclif-brightgreen.svg)](https://packdir.com)
-[![Version](https://img.shields.io/npm/v/oclif-hello-world.svg)](https://npmjs.org/package/packdir-cli)
 [![CircleCI](https://circleci.com/gh/oclif/hello-world/tree/main.svg?style=shield)](https://circleci.com/gh/oclif/hello-world/tree/main)
-[![Downloads/week](https://img.shields.io/npm/dw/oclif-hello-world.svg)](https://npmjs.org/package/oclif-hello-world)
-[![License](https://img.shields.io/npm/l/oclif-hello-world.svg)](https://github.com/oclif/hello-world/blob/main/package.json)
 
 <!-- toc -->
 * [Usage](#usage)
@@ -20,7 +17,7 @@ $ npm install -g packdir-cli
 $ pd COMMAND
 running command...
 $ pd (--version)
-packdir-cli/0.0.2 linux-x64 node-v14.15.1
+packdir-cli/0.0.3 linux-x64 node-v14.15.1
 $ pd --help [COMMAND]
 USAGE
   $ pd COMMAND
@@ -44,7 +41,7 @@ USAGE
 
 ## `pd create [FILE]`
 
-Create a document.
+Create an EPUB book.
 
 ```
 USAGE
@@ -55,13 +52,13 @@ FLAGS
   -n, --name=<value>  name to print
 
 DESCRIPTION
-  Create a document.
+  Create an EPUB book.
 
 EXAMPLES
   $ pd create
 ```
 
-_See code: [dist/commands/create.ts](https://github.com/packdir/pd/blob/v0.0.2/dist/commands/create.ts)_
+_See code: [dist/commands/create.ts](https://github.com/packdir/pd/blob/v0.0.3/dist/commands/create.ts)_
 
 ## `pd hello PERSON`
 
@@ -85,7 +82,7 @@ EXAMPLES
   hello friend from oclif! (./src/commands/hello/index.ts)
 ```
 
-_See code: [dist/commands/hello/index.ts](https://github.com/packdir/pd/blob/v0.0.2/dist/commands/hello/index.ts)_
+_See code: [dist/commands/hello/index.ts](https://github.com/packdir/pd/blob/v0.0.3/dist/commands/hello/index.ts)_
 
 ## `pd hello world`
 
@@ -141,7 +138,7 @@ EXAMPLES
   $ pd init
 ```
 
-_See code: [dist/commands/init.ts](https://github.com/packdir/pd/blob/v0.0.2/dist/commands/init.ts)_
+_See code: [dist/commands/init.ts](https://github.com/packdir/pd/blob/v0.0.3/dist/commands/init.ts)_
 
 ## `pd list [FILE]`
 
@@ -162,7 +159,7 @@ EXAMPLES
   $ pd list
 ```
 
-_See code: [dist/commands/list.ts](https://github.com/packdir/pd/blob/v0.0.2/dist/commands/list.ts)_
+_See code: [dist/commands/list.ts](https://github.com/packdir/pd/blob/v0.0.3/dist/commands/list.ts)_
 
 ## `pd plugins`
 

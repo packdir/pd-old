@@ -44,18 +44,11 @@ export default class Create extends Command {
 
     // Generate from markdown files in current path.
     const [docTitle, mdcontent] = await Packdocument.generateFromPath()
-    console.log('cntent::', mdcontent)
-    const contentmd: Chapter[] = [
-      {
-        title: docTitle,
-        content: mdcontent
-      }
-    ]
+    const contentmd: Chapter[] = mdcontent
 
     // Alice
     //const content = await epub(optionsAlice, contentAlice)
     const content = await epub(optionsAlice, contentmd)
     await writeFile(`${docTitle}.epub`, Buffer.from(content))
-    console.log('Alice: finised')
   }
 }

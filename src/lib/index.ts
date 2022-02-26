@@ -55,7 +55,7 @@ export class EPub {
     this.log('Downloading images...');
     //await this.downloadAllImages();
     this.log('Making cover...');
-    //await this.makeCover();
+    await this.makeCover();
     this.log('Finishing up...');
     return this;
   }

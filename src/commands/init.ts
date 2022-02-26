@@ -4,7 +4,7 @@
 
 import { Command, Flags } from '@oclif/core'
 import { stat, mkdir, writeFile, readdir } from 'fs/promises'
-import { basename } from 'path'
+import path from 'path'
 import inquirer from 'inquirer'
 
 /**
@@ -57,12 +57,12 @@ export default class Init extends Command {
         console.log('Error: ', err)
       })
 
-    // Create .packdir directory
-    //stat('.packdir').catch(async (err) => {
-    //  if (err.code === 'ENOENT') { // Directory .packdir is not existing
-    //    await mkdir('.packdir/epubs', { recursive: true })
-    //  }
-    //})
+    // Create packdir directory
+    stat('packdir').catch(async (err) => {
+      if (err.code === 'ENOENT') { // Directory packdir is not existing
+        await mkdir('packdir', { recursive: true })
+      }
+    })
   }
 
   /**
@@ -71,13 +71,26 @@ export default class Init extends Command {
    * @returns Questions for init.
    */
   private async initQuestions() {
-    const currentPathname = basename(process.cwd())
+    const currentPathname = path.basename(process.cwd())
+
+    // Markdown list
+    let markdownFiles: fileInQuestion[] = []
+    // Image list
+    let imageFiles: fileInQuestion[] = []
 
     const files = await readdir('./')
-    let markdownFiles: fileInQuestion[] = []
     files.forEach((filename) => {
-      if ('.md' === filename.substring(filename.length - 3).toLowerCase()) {
+      const ext = path.extname(filename).toLowerCase()
+      if ('.md' === ext) {
         markdownFiles.push({
+          name: filename,
+          checked: true,
+          value: filename
+        })
+      }
+
+      if ('.jpg' === ext || '.png' === ext) {
+        imageFiles.push({
           name: filename,
           checked: true,
           value: filename
@@ -104,8 +117,26 @@ export default class Init extends Command {
         message: 'What files do you want to include?',
         pageSize: 25,
         choices: markdownFiles
-      }
+      },
     ]
+
+    // Choose cover image.
+    if (imageFiles.length > 0) {
+      imageFiles.push({
+        name: '[none]',
+        checked: true,
+        value: 'none'
+      })
+
+      questions.push({
+        type: 'list',
+        name: 'doc_cover',
+        message: 'Choose the cover image:',
+        pageSize: 25,
+        choices: imageFiles
+      })
+    }
+
     return questions
   }
 
@@ -115,9 +146,18 @@ export default class Init extends Command {
       articles.push(filename)
     })
 
+    let urlcover = ''
+    if (answers.doc_cover && answers.doc_cover.length > 0 && answers.doc_cover !== 'none') {
+      const pathname = path.resolve(answers.doc_cover)
+      if (pathname) {
+        urlcover = `file://${pathname}`
+      }
+    }
+
     const config = {
       "documentName": answers.doc_name,
       "author": answers.author,
+      "cover": urlcover,
       "content": articles
     }
 

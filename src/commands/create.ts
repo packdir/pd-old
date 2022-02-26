@@ -1,13 +1,10 @@
 /**
- * Create a PD document.
+ * Create an EPUB.
  */
 
 import { writeFile } from 'fs/promises'
 import { Command, Flags } from '@oclif/core'
 import { Packdocument } from '../packDocument'
-
-// Test book:
-import { contentAlice, optionsAlice } from '../aliceData'
 import epub, { Chapter } from '../lib'
 
 export default class Create extends Command {
@@ -37,18 +34,16 @@ export default class Create extends Command {
 
     // Test epub.
     //const metadata = {
-    //  title: "custome title OKOK2w"
+    //  title: "custome title"
     //}
     //const epub2 = new Packdocument(metadata)
     //epub2.saveAsEpub()
 
     // Generate from markdown files in current path.
-    const [docTitle, mdcontent] = await Packdocument.generateFromPath()
+    const [options, mdcontent] = await Packdocument.generateFromPath()
     const contentmd: Chapter[] = mdcontent
 
-    // Alice
-    //const content = await epub(optionsAlice, contentAlice)
-    const content = await epub(optionsAlice, contentmd)
-    await writeFile(`${docTitle}.epub`, Buffer.from(content))
+    const content = await epub(options, contentmd)
+    await writeFile(`${options.title}.epub`, Buffer.from(content))
   }
 }

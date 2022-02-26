@@ -13,6 +13,7 @@ import {
   Options, optionsDefaults, optionsPredicate, retryFetch, type, uuid,
   validateAndNormalizeChapters, validateAndNormalizeOptions }
   from '../lib/util';
+//import { config } from 'process';
 
 interface MetadataObject {
   title: string
@@ -52,10 +53,11 @@ export class Packdocument {
     this.version = "3.0"
   }
 
-  static async generateFromPath(): Promise<[string, Chapter[]]> {
+  static async generateFromPath(): Promise<[Options, Chapter[]]> {
     //let html = ''
     let htmls: Chapter[] = []
     let docTitle = ''
+    let coverUrl = ''
 
     try {
       // Get config
@@ -71,6 +73,8 @@ export class Packdocument {
           content: marked(mdstring)
         })
       }
+
+      coverUrl = (config.cover && config.cover !== '') ? config.cover : '';
 
       // path to the book
       //const pathname = basename(process.cwd())
@@ -92,7 +96,22 @@ export class Packdocument {
       console.log('Error to read dir. ', err)
     }
 
-    return [docTitle, htmls]
+    const date = new Date();
+    date.setFullYear(2000);
+    const options: Options = {
+      title: docTitle,
+      //author: "Lewis Carroll",
+      //publisher: "Macmillan & Co.",
+      date: date.toString(),
+      version: 3,
+      verbose: true,
+    }
+
+    if (coverUrl) {
+      options.cover = coverUrl
+    }
+
+    return [options, htmls]
   }
 
   /**

@@ -27,7 +27,7 @@ export default class Create extends Command {
     const {args, flags} = await this.parse(Create)
 
     const name = flags.name ?? 'world'
-    this.log(`hello ${name} from /mnt/d/Henry/packdir/pd/src/commands/create.ts`)
+    this.log(`hello ${name} from /mnt/d/Henry/packdir/pd/src/commands/gen.ts`)
     if (args.file && flags.force) {
       this.log(`you input --force and --file: ${args.file}`)
     }

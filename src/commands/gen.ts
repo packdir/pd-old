@@ -6,6 +6,7 @@ import { writeFile } from 'fs/promises'
 import { Command, Flags } from '@oclif/core'
 import { Packdocument } from '../packDocument'
 import epub, { Chapter } from '../lib'
+import chokdir from 'chokidar'
 
 export default class Create extends Command {
   static description = 'Create an EPUB book.'
@@ -24,6 +25,12 @@ export default class Create extends Command {
   static args = [{name: 'file'}]
 
   public async run(): Promise<void> {
+    console.log('操作系统：', process.platform)
+    //chokdir.watch('.').on('all', (event, path) => {
+    //  console.log('event: ', event)
+    //  console.log('path: ', path)
+    //})
+    return
     const {args, flags} = await this.parse(Create)
 
     const name = flags.name ?? 'world'

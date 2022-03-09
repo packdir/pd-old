@@ -1,10 +1,8 @@
 Packdir cli (pd)
 =================
 
-Command line tool to generate epub books for markdown files.
+Command line tool to manage files and generate epub books for markdown files.
 
-[![packdir.com](https://img.shields.io/badge/cli-oclif-brightgreen.svg)](https://packdir.com)
-[![CircleCI](https://circleci.com/gh/oclif/hello-world/tree/main.svg?style=shield)](https://circleci.com/gh/oclif/hello-world/tree/main)
 
 <!-- toc -->
 * [Usage](#usage)
@@ -17,7 +15,7 @@ $ npm install -g packdir-cli
 $ pd COMMAND
 running command...
 $ pd (--version)
-packdir-cli/0.1.0 linux-x64 node-v14.15.1
+packdir-cli/0.1.3 linux-x64 node-v14.15.1
 $ pd --help [COMMAND]
 USAGE
   $ pd COMMAND
@@ -26,12 +24,13 @@ USAGE
 <!-- usagestop -->
 # Commands
 <!-- commands -->
-* [`pd create [FILE]`](#pd-create-file)
+* [`pd gen [FILE]`](#pd-gen-file)
 * [`pd hello PERSON`](#pd-hello-person)
 * [`pd hello world`](#pd-hello-world)
 * [`pd help [COMMAND]`](#pd-help-command)
 * [`pd init [FILE]`](#pd-init-file)
 * [`pd list [FILE]`](#pd-list-file)
+* [`pd open FILENAME`](#pd-open-filename)
 * [`pd plugins`](#pd-plugins)
 * [`pd plugins:inspect PLUGIN...`](#pd-pluginsinspect-plugin)
 * [`pd plugins:install PLUGIN...`](#pd-pluginsinstall-plugin)
@@ -39,13 +38,13 @@ USAGE
 * [`pd plugins:uninstall PLUGIN...`](#pd-pluginsuninstall-plugin)
 * [`pd plugins update`](#pd-plugins-update)
 
-## `pd create [FILE]`
+## `pd gen [FILE]`
 
 Create an EPUB book.
 
 ```
 USAGE
-  $ pd create [FILE] [-n <value>] [-f]
+  $ pd gen [FILE] [-n <value>] [-f]
 
 FLAGS
   -f, --force
@@ -55,10 +54,10 @@ DESCRIPTION
   Create an EPUB book.
 
 EXAMPLES
-  $ pd create
+  $ pd gen
 ```
 
-_See code: [dist/commands/create.ts](https://github.com/packdir/pd/blob/v0.1.0/dist/commands/create.ts)_
+_See code: [dist/commands/gen.ts](https://github.com/packdir/pd/blob/v0.1.3/dist/commands/gen.ts)_
 
 ## `pd hello PERSON`
 
@@ -82,7 +81,7 @@ EXAMPLES
   hello friend from oclif! (./src/commands/hello/index.ts)
 ```
 
-_See code: [dist/commands/hello/index.ts](https://github.com/packdir/pd/blob/v0.1.0/dist/commands/hello/index.ts)_
+_See code: [dist/commands/hello/index.ts](https://github.com/packdir/pd/blob/v0.1.3/dist/commands/hello/index.ts)_
 
 ## `pd hello world`
 
@@ -138,7 +137,7 @@ EXAMPLES
   $ pd init
 ```
 
-_See code: [dist/commands/init.ts](https://github.com/packdir/pd/blob/v0.1.0/dist/commands/init.ts)_
+_See code: [dist/commands/init.ts](https://github.com/packdir/pd/blob/v0.1.3/dist/commands/init.ts)_
 
 ## `pd list [FILE]`
 
@@ -159,151 +158,28 @@ EXAMPLES
   $ pd list
 ```
 
-_See code: [dist/commands/list.ts](https://github.com/packdir/pd/blob/v0.1.0/dist/commands/list.ts)_
+_See code: [dist/commands/list.ts](https://github.com/packdir/pd/blob/v0.1.3/dist/commands/list.ts)_
 
-## `pd plugins`
+## `pd open FILENAME`
 
-List installed plugins.
+Open an file with default application.
 
 ```
 USAGE
-  $ pd plugins [--core]
+  $ pd open [FILENAME] [-n <value>] [-f]
 
 FLAGS
-  --core  Show core plugins.
+  -f, --force
+  -n, --name=<value>  name to print
 
 DESCRIPTION
-  List installed plugins.
+  Open an file with default application.
 
 EXAMPLES
-  $ pd plugins
+  $ pd open
 ```
 
-_See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/v2.1.0/src/commands/plugins/index.ts)_
+_See code: [dist/commands/open.ts](https://github.com/packdir/pd/blob/v0.1.3/dist/commands/open.ts)_
 
-## `pd plugins:inspect PLUGIN...`
 
-Displays installation properties of a plugin.
-
-```
-USAGE
-  $ pd plugins:inspect PLUGIN...
-
-ARGUMENTS
-  PLUGIN  [default: .] Plugin to inspect.
-
-FLAGS
-  -h, --help     Show CLI help.
-  -v, --verbose
-
-DESCRIPTION
-  Displays installation properties of a plugin.
-
-EXAMPLES
-  $ pd plugins:inspect myplugin
-```
-
-## `pd plugins:install PLUGIN...`
-
-Installs a plugin into the CLI.
-
-```
-USAGE
-  $ pd plugins:install PLUGIN...
-
-ARGUMENTS
-  PLUGIN  Plugin to install.
-
-FLAGS
-  -f, --force    Run yarn install with force flag.
-  -h, --help     Show CLI help.
-  -v, --verbose
-
-DESCRIPTION
-  Installs a plugin into the CLI.
-
-  Can be installed from npm or a git url.
-
-  Installation of a user-installed plugin will override a core plugin.
-
-  e.g. If you have a core plugin that has a 'hello' command, installing a user-installed plugin with a 'hello' command
-  will override the core plugin implementation. This is useful if a user needs to update core plugin functionality in
-  the CLI without the need to patch and update the whole CLI.
-
-ALIASES
-  $ pd plugins add
-
-EXAMPLES
-  $ pd plugins:install myplugin 
-
-  $ pd plugins:install https://github.com/someuser/someplugin
-
-  $ pd plugins:install someuser/someplugin
-```
-
-## `pd plugins:link PLUGIN`
-
-Links a plugin into the CLI for development.
-
-```
-USAGE
-  $ pd plugins:link PLUGIN
-
-ARGUMENTS
-  PATH  [default: .] path to plugin
-
-FLAGS
-  -h, --help     Show CLI help.
-  -v, --verbose
-
-DESCRIPTION
-  Links a plugin into the CLI for development.
-
-  Installation of a linked plugin will override a user-installed or core plugin.
-
-  e.g. If you have a user-installed or core plugin that has a 'hello' command, installing a linked plugin with a 'hello'
-  command will override the user-installed or core plugin implementation. This is useful for development work.
-
-EXAMPLES
-  $ pd plugins:link myplugin
-```
-
-## `pd plugins:uninstall PLUGIN...`
-
-Removes a plugin from the CLI.
-
-```
-USAGE
-  $ pd plugins:uninstall PLUGIN...
-
-ARGUMENTS
-  PLUGIN  plugin to uninstall
-
-FLAGS
-  -h, --help     Show CLI help.
-  -v, --verbose
-
-DESCRIPTION
-  Removes a plugin from the CLI.
-
-ALIASES
-  $ pd plugins unlink
-  $ pd plugins remove
-```
-
-## `pd plugins update`
-
-Update installed plugins.
-
-```
-USAGE
-  $ pd plugins update [-h] [-v]
-
-FLAGS
-  -h, --help     Show CLI help.
-  -v, --verbose
-
-DESCRIPTION
-  Update installed plugins.
-```
 <!-- commandsstop -->

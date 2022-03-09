@@ -4,7 +4,8 @@ import archiver from 'archiver'
 
 import { writeFile, readdir, readFile, stat, mkdir } from 'fs/promises';
 import { createWriteStream } from 'fs'
-import { marked } from 'marked'
+import { pdMarked } from '../pd-marked'
+//import { marked } from 'marked'
 //import { join, basename } from 'path'
 
 // From epub-gen-memory
@@ -70,7 +71,7 @@ export class Packdocument {
         const [articleTitle, mdstring] = this.getMarkdownArticleTitle(content, file, count++)
         htmls.push({
           title: articleTitle,
-          content: marked(mdstring)
+          content: pdMarked(mdstring)
         })
       }
 

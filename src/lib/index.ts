@@ -53,7 +53,7 @@ export class EPub {
     this.log('Downloading fonts...');
     //await this.downloadAllFonts();
     this.log('Downloading images...');
-    //await this.downloadAllImages();
+    await this.downloadAllImages();
     this.log('Making cover...');
     await this.makeCover();
     this.log('Finishing up...');

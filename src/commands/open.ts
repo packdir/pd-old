@@ -1,19 +1,13 @@
 import { Command, Flags } from '@oclif/core'
 import { exec } from 'child_process'
+import { fstat, existsSync } from 'fs'
 
 export default class Open extends Command {
-  static description = 'Open an file with default application.'
+  static description = 'Open a file with the default application.'
 
   static examples = [
     '<%= config.bin %> <%= command.id %>',
   ]
-
-  static flags = {
-    // flag with a value (-n, --name=VALUE)
-    name: Flags.string({char: 'n', description: 'name to print'}),
-    // flag with no value (-f, --force)
-    force: Flags.boolean({char: 'f'}),
-  }
 
   static args = [{name: 'filename', required: true}]
 
@@ -32,8 +26,11 @@ export default class Open extends Command {
   public async run(): Promise<void> {
     const {args, flags} = await this.parse(Open)
     if (args.filename) {
-      // todo: Warns if file does not exist.
-      exec(this.getCommandLine() + ' ' + args.filename)
+      if (existsSync(args.filename)) {
+        exec(this.getCommandLine() + ' ' + args.filename)
+      } else {
+        console.log(`File ${args.filename} does NOT exist!`)
+      }
     }
   }
 }

@@ -1,6 +1,6 @@
 {
-  "name": "packdir-cli",
-  "version": "0.1.5",
+  "name": "@packdir/cli",
+  "version": "0.1.6",
   "description": "Packdir CLI",
   "author": "Henry Hu",
   "bin": {

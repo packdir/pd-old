@@ -51,7 +51,7 @@ export default class Init extends Command {
       .then( async (answers) => {
         const config = this.generateConfig(answers)
         await writeFile('packdir.json', config)
-        console.log('Create packdir.json successfully!')
+        console.log('Created packdir.json successfully!')
       })
       .catch((err) => {
         console.log('Error: ', err)

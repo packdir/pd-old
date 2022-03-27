@@ -2,21 +2,24 @@
  * Customize marked.
  */
 
+import path from 'path'
+import _ from "lodash"
 import { marked } from 'marked'
 
 /**
- * Override image renderer.
+ * Override image renderer for local images.
  */
-
 const renderer = {
-
   image(href: string, title: string, text: string) {
-    console.log('IN huhu: ', href)
-    console.log('---------------------05-')
-    href = 'file:///mnt/d/Henry/packdir/pd/alice.jpg'
     //href = cleanUrl(this.options.sanitize, this.options.baseUrl, href);
     if (href === null) {
       return text
+    }
+
+    if (!_.startsWith(href, "http://") && !_.startsWith(href, "https://")) {
+      // Local image
+      const filepath = path.join(process.cwd(), href)
+      href = `file://${filepath}`
     }
 
     let out = '<img src="' + href + '" alt="' + text + '"'
@@ -31,4 +34,3 @@ const renderer = {
 marked.use({ renderer })
 
 export { marked as pdMarked }
-

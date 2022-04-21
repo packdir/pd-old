@@ -3,9 +3,12 @@
  */
 
 import { Command, Flags } from '@oclif/core'
+import fs from 'fs'
 import { stat, mkdir, writeFile, readdir } from 'fs/promises'
 import path from 'path'
 import inquirer from 'inquirer'
+//import { from, Observable, Observer } from 'rxjs'
+//import * as Rx from 'rxjs'
 
 /**
  * Interface for the status of files in init qestions.
@@ -19,15 +22,15 @@ interface fileInQuestion {
 export default class Init extends Command {
   static description = 'Init to create packdir.json'
 
-  static examples = [
-    '<%= config.bin %> <%= command.id %>',
-  ]
+  //static examples = [
+  //  '<%= config.bin %> <%= command.id %>',
+  //]
 
-  static flags = {
-    yes: Flags.boolean({char: 'y'}),
-  }
+  //static flags = {
+  //  yes: Flags.boolean({char: 'y'}),
+  //}
 
-  static args = [{name: 'file'}]
+  //static args = [{name: 'file'}]
 
   public async run(): Promise<void> {
     this.log('This utility will walk you through creating a packdir.json file.')
@@ -45,6 +48,18 @@ export default class Init extends Command {
     }
 
     const questions = await this.initQuestions()
+
+    /*
+    let emitter
+    let prompts = new Observable((observer: Observer<any>) => {
+      emitter = observer
+      emitter.next(questions)
+      emitter.complete()
+    })
+
+    inquirer.prompt(prompts).ui.process.subscribe({
+    })
+    */
 
     inquirer
       .prompt(questions)
@@ -78,17 +93,14 @@ export default class Init extends Command {
     // Image list
     let imageFiles: fileInQuestion[] = []
 
+    // Markdown files
+    const p = process.cwd()
+    await this.getMarkdownFilesInDirectory(p, markdownFiles)
+
+    // Possible cover.
     const files = await readdir('./')
     files.forEach((filename) => {
       const ext = path.extname(filename).toLowerCase()
-      if ('.md' === ext) {
-        markdownFiles.push({
-          name: filename,
-          checked: true,
-          value: filename
-        })
-      }
-
       if ('.jpg' === ext || '.png' === ext) {
         imageFiles.push({
           name: filename,
@@ -162,5 +174,38 @@ export default class Init extends Command {
     }
 
     return JSON.stringify(config, null, 2)
+  }
+
+  /**
+   * Read a directory to find markdown files.
+   *
+   * @param dir Directory to check
+   */
+  private async getMarkdownFilesInDirectory(dir: string,
+                                            markdownFiles: fileInQuestion[],
+                                            pathPrefix = '',
+                                            layer = 0) {
+    console.log('dir: ', dir)
+    const files = await readdir(dir)
+    files.forEach(async (filename) => {
+      const p = path.join(dir, filename)
+      if (fs.lstatSync(p).isDirectory()) {
+        if (layer < 1) {
+          const new_prefix = (pathPrefix ? `${pathPrefix}/` : '') + filename
+          await this.getMarkdownFilesInDirectory(p, markdownFiles, new_prefix, layer + 1)
+        }
+      } else {
+        const ext = path.extname(filename).toLowerCase()
+        if ('.md' === ext) {
+          const name = (pathPrefix ? `${pathPrefix}/` : '') + filename
+          markdownFiles.push({
+            name,
+            checked: true,
+            value: name
+          })
+        }
+      }
+    })
+    return markdownFiles
   }
 }

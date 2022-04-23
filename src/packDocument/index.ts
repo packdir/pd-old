@@ -1,6 +1,7 @@
 
 //import * as fs from "fs"
 import archiver from 'archiver'
+import path from 'path'
 
 import { writeFile, readdir, readFile, stat, mkdir } from 'fs/promises';
 import { createWriteStream } from 'fs'
@@ -67,6 +68,10 @@ export class Packdocument {
       docTitle = config.documentName
       let count = 1
       for (const file of config.content) {
+        // Get path string for image generation.
+        const pathString = path.parse(file)
+        global.currentFilePath = pathString.dir
+
         const content = await readFile(`./${file}`, { encoding: 'utf-8' })
         const [articleTitle, mdstring] = this.getMarkdownArticleTitle(content, file, count++)
         htmls.push({

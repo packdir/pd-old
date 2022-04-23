@@ -16,9 +16,11 @@ const renderer = {
       return text
     }
 
+    const currentFilePath = global.currentFilePath
+
     if (!_.startsWith(href, "http://") && !_.startsWith(href, "https://")) {
       // Local image
-      const filepath = path.join(process.cwd(), href)
+      const filepath = path.join(process.cwd(), currentFilePath, href)
       href = `file://${filepath}`
     }
 

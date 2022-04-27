@@ -185,7 +185,6 @@ export default class Init extends Command {
                                             markdownFiles: fileInQuestion[],
                                             pathPrefix = '',
                                             layer = 0) {
-    console.log('dir: ', dir)
     const files = await readdir(dir)
     files.forEach(async (filename) => {
       const p = path.join(dir, filename)

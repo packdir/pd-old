@@ -65,7 +65,7 @@ export default class Init extends Command {
       .prompt(questions)
       .then( async (answers) => {
         const config = this.generateConfig(answers)
-        await writeFile('packdir.json', config)
+        await writeFile('pd.json', config)
         console.log('Created packdir.json successfully!')
       })
       .catch((err) => {

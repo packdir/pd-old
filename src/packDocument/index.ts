@@ -63,7 +63,7 @@ export class Packdocument {
 
     try {
       // Get config
-      const rawconfig = await readFile(`./packdir.json`, { encoding: 'utf-8' })
+      const rawconfig = await readFile(`./pd.json`, { encoding: 'utf-8' })
       const config = JSON.parse(rawconfig)
       docTitle = config.documentName
       let count = 1

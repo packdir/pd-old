@@ -20,7 +20,7 @@ $ npm install -g @packdir/cli
 $ pd COMMAND
 running command...
 $ pd (--version)
-@packdir/cli/0.1.14 linux-x64 node-v16.17.0
+@packdir/cli/0.1.15 linux-x64 node-v16.17.0
 $ pd --help [COMMAND]
 USAGE
   $ pd COMMAND
@@ -32,6 +32,7 @@ USAGE
 * [`pd hello PERSON`](#pd-hello-person)
 * [`pd hello world`](#pd-hello-world)
 * [`pd help [COMMAND]`](#pd-help-command)
+* [`pd login`](#pd-login)
 * [`pd plugins`](#pd-plugins)
 * [`pd plugins:install PLUGIN...`](#pd-pluginsinstall-plugin)
 * [`pd plugins:inspect PLUGIN...`](#pd-pluginsinspect-plugin)
@@ -64,7 +65,7 @@ EXAMPLES
   hello friend from oclif! (./src/commands/hello/index.ts)
 ```
 
-_See code: [dist/commands/hello/index.ts](https://github.com/packdir/pd/blob/v0.1.14/dist/commands/hello/index.ts)_
+_See code: [dist/commands/hello/index.ts](https://github.com/packdir/pd/blob/v0.1.15/dist/commands/hello/index.ts)_
 
 ## `pd hello world`
 
@@ -101,6 +102,20 @@ DESCRIPTION
 ```
 
 _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v5.1.19/src/commands/help.ts)_
+
+## `pd login`
+
+Login
+
+```
+USAGE
+  $ pd login
+
+DESCRIPTION
+  Login
+```
+
+_See code: [dist/commands/login.ts](https://github.com/packdir/pd/blob/v0.1.15/dist/commands/login.ts)_
 
 ## `pd plugins`
 

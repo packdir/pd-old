@@ -1,7 +1,7 @@
 {
   "name": "@packdir/cli",
-  "version": "0.1.14",
-  "description": "oclif example Hello World CLI",
+  "version": "0.2.0",
+  "description": "Packdir CLI",
   "author": "Henry",
   "bin": {
     "pd": "./bin/run"
@@ -21,11 +21,13 @@
     "@oclif/plugin-help": "^5",
     "@oclif/plugin-plugins": "^2.1.7",
     "axios": "^1.2.0",
+    "fs-extra": "^11.1.0",
     "inquirer": "^8.2.5"
   },
   "devDependencies": {
     "@oclif/test": "^2.2.12",
     "@types/chai": "^4",
+    "@types/fs-extra": "^9.0.13",
     "@types/inquirer": "^8.2.5",
     "@types/mocha": "^9.0.0",
     "@types/node": "^16.18.4",

@@ -55,11 +55,10 @@ export default class Login extends Command {
             //const configPath = path.join(os.homedir(), '.packdir')
             //const mode = 0o775
             //fs.ensureDirSync(configPath, mode)
-            console.log('homedir: ', os.homedir())
 
             const tokenfile = path.join(os.homedir(), '.packdir', 'token')
             fs.outputFileSync(tokenfile, response.data.token)
-            console.log('Login successful!OKEND: ')
+            console.log('Login successfully!')
           } else {
             console.error('Error! Login failed.')
           }

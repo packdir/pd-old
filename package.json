@@ -1,6 +1,6 @@
 {
   "name": "@packdir/cli",
-  "version": "0.2.1",
+  "version": "0.3.1",
   "description": "Packdir CLI",
   "author": "Henry",
   "bin": {
@@ -22,13 +22,15 @@
     "@oclif/plugin-plugins": "^2.1.7",
     "axios": "^1.2.0",
     "fs-extra": "^11.1.0",
-    "inquirer": "^8.2.5"
+    "inquirer": "^8.2.5",
+    "md5-file": "^5.0.0"
   },
   "devDependencies": {
     "@oclif/test": "^2.2.12",
     "@types/chai": "^4",
     "@types/fs-extra": "^9.0.13",
     "@types/inquirer": "^8.2.5",
+    "@types/md5-file": "^5.0.0",
     "@types/mocha": "^9.0.0",
     "@types/node": "^16.18.4",
     "chai": "^4",
@@ -62,7 +64,7 @@
     "lint": "eslint . --ext .ts --config .eslintrc",
     "postpack": "shx rm -f oclif.manifest.json",
     "posttest": "yarn lint",
-    "prepack": "yarn build && oclif manifest",
+    "prepack": "yarn build && oclif manifest && oclif readme",
     "test": "mocha --forbid-only \"test/**/*.test.ts\"",
     "version": "oclif readme && git add README.md"
   },
@@ -71,7 +73,7 @@
   },
   "bugs": "https://github.com/https://github.com/packdir/pd/pd/issues",
   "keywords": [
-    "oclif"
+    "packdir"
   ],
   "types": "dist/index.d.ts"
 }

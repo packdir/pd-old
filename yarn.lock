@@ -745,6 +745,13 @@
   "resolved" "https://registry.npmjs.org/@types/lodash/-/lodash-4.14.178.tgz"
   "version" "4.14.178"
 
+"@types/md5-file@^5.0.0":
+  "integrity" "sha512-b5wGwzjovLIcHNNmxT9u8pNumt1vxZ/+tRIpe10R6ZriTipq8NqQIGH95rC7gn4PlZR6R2Rr7hNavTW7n5GQ3Q=="
+  "resolved" "https://registry.npmjs.org/@types/md5-file/-/md5-file-5.0.0.tgz"
+  "version" "5.0.0"
+  dependencies:
+    "md5-file" "*"
+
 "@types/minimatch@*", "@types/minimatch@^3.0.3":
   "integrity" "sha512-Klz949h02Gz2uZCMGwDUSDS1YBlTdDDgbWHi+81l29tQALUtvz4rAYi5uoVhE5Lagoq6DeqAUlbrHvW/mXDgdQ=="
   "resolved" "https://registry.npmjs.org/@types/minimatch/-/minimatch-3.0.5.tgz"
@@ -3413,6 +3420,11 @@
     "promise-retry" "^2.0.1"
     "socks-proxy-agent" "^6.0.0"
     "ssri" "^8.0.0"
+
+"md5-file@*", "md5-file@^5.0.0":
+  "integrity" "sha512-xbEFXCYVWrSx/gEKS1VPlg84h/4L20znVIulKw6kMfmBUAZNAnF00eczz9ICMl+/hjQGo5KSXRxbL/47X3rmMw=="
+  "resolved" "https://registry.npmjs.org/md5-file/-/md5-file-5.0.0.tgz"
+  "version" "5.0.0"
 
 "mem-fs-editor@^8.1.2 || ^9.0.0":
   "integrity" "sha512-7p+bBDqsSisO20YIZf2ntYvST27fFJINn7CKE21XdPUQDcLV62b/yB5sTOooQeEoiZ3rldZQ+4RfONgL/gbRoA=="

@@ -6,8 +6,8 @@ import { trimSlash } from '../utils/pdtools'
 import { BAIDU_TARGET_ROOT } from '../utils/constants'
 //import * as md5File from 'md5-file'
 //import { Curl } from 'node-libcurl'
-
-const FormData = require('form-data')
+import * as FormData from 'form-data'
+//const FormData = require('form-data')
 
 const exec = require('child_process').exec
 

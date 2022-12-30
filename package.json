@@ -59,6 +59,12 @@
       "hello": {
         "description": "Say hello to the world and others"
       }
+    },
+    "hooks": {
+      "init": [
+        "./dist/hooks/init/s3",
+        "./dist/hooks/init/sqlite"
+      ]
     }
   },
   "scripts": {

@@ -7,7 +7,7 @@ import { PACKDIR_ACCESS_TOKEN } from '../../utils/constants'
 import axios from 'axios'
 
 export default class Cp extends Command {
-  static description = 'Copy files.'
+  static description = 'Copy files or directories.'
 
   static flags = {
     target: Flags.string({char: 't', description: 'Target path.'}),
